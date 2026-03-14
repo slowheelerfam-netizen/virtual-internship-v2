@@ -3,7 +3,7 @@ Copy of Virtual Internship v2
 # Summarist Build Progress
 
 [x] Section 1 — Project Setup & Home Page
-[ ] Section 2 — Authentication Modal
+[x] Section 2 — Authentication Modal
 [ ] Section 3 — For You Page
 [ ] Section 4 — Inside Book Page (/book/:id)
 [ ] Section 5 — Player Page (/player/:id)

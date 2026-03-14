@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Providers from "@/components/Providers";
+import AuthModal from "@/components/AuthModal";
 
 export const metadata: Metadata = {
   title: "Summarist",
@@ -13,7 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>
+          {children}
+          <AuthModal />
+        </Providers>
+      </body>
     </html>
   );
 }

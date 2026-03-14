@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { AiFillFileText, AiFillBulb, AiFillAudio } from "react-icons/ai";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
@@ -5,6 +7,10 @@ import { BiCrown } from "react-icons/bi";
 import { RiLeafLine } from "react-icons/ri";
 import StatisticsSection from "@/components/StatisticsSection";
 import "./home.css";
+import LoginButton from "@/components/LoginButton";
+
+
+
 
 export default function Home() {
   return (
@@ -15,7 +21,7 @@ export default function Home() {
             <Image className="nav__img" src="/logo.png" alt="logo" width={200} height={50} />
           </figure>
           <ul className="nav__list--wrapper">
-            <li className="nav__list nav__list--login">Login</li>
+            <li className="nav__list nav__list--login"><LoginButton /></li>
             <li className="nav__list nav__list--mobile">About</li>
             <li className="nav__list nav__list--mobile">Contact</li>
             <li className="nav__list nav__list--mobile">Help</li>
@@ -39,7 +45,7 @@ export default function Home() {
                   <br className="remove--tablet" />
                   and even people who don&apos;t like to read.
                 </div>
-                <button className="btn home__cta--btn">Login</button>
+                <LoginButton className="btn home__cta--btn" />
               </div>
               <figure className="landing__image--mask">
                 <Image src="/landing.png" alt="landing" width={400} height={400} />
@@ -110,7 +116,7 @@ export default function Home() {
               </div>
             </div>
             <div className="reviews__btn--wrapper">
-              <button className="btn home__cta--btn">Login</button>
+              <LoginButton className="btn home__cta--btn" />
             </div>
           </div>
         </div>
