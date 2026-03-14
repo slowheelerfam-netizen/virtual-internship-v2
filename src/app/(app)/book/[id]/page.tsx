@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Book } from "@/types/book";
 import Image from "next/image";
-import { BsBookmark, BsStar } from "react-icons/bs";
+import { BsBookmark, BsStar, BsMic } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
-import { AiOutlineAudio, AiOutlineBulb } from "react-icons/ai";
+import { AiFillAudio, AiFillBulb } from "react-icons/ai";
 import { useAppDispatch } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import { auth } from "@/lib/firebase";
@@ -83,12 +83,12 @@ export default function BookPage() {
               <BiTime style={{ flexShrink: 0 }} />
               <span>3 mins</span>
             </div>
-           <div className="flex items-center gap-2" style={{ fontSize: "16px", fontWeight: 500, color: "#032b41" }}>
-              <AiOutlineAudio style={{ flexShrink: 0 }} />
+            <div className="flex items-center gap-2" style={{ fontSize: "16px", fontWeight: 500, color: "#032b41" }}>
+              <AiFillAudio style={{ flexShrink: 0 }} />
               <span>{book.type}</span>
             </div>
             <div className="flex items-center gap-2" style={{ fontSize: "16px", fontWeight: 500, color: "#032b41" }}>
-              <AiOutlineBulb style={{ flexShrink: 0 }} />
+              <AiFillBulb style={{ flexShrink: 0 }} />
               <span>{book.keyIdeas} Key ideas</span>
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function BookPage() {
               <LuBookOpenText size={20} /> Read
             </button>
             <button onClick={handleReadListen} className="btn-primary">
-              <AiOutlineAudio size={18} /> Listen
+              <BsMic size={18} /> Listen
             </button>
           </div>
 
