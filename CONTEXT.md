@@ -5,12 +5,12 @@ Copy of Virtual Internship v2
 [x] Section 1 — Project Setup & Home Page
 [x] Section 2 — Authentication Modal
 [x] Section 3 — For You Page
-[ ] Section 4 — Inside Book Page (/book/:id)
+[x] Section 4 — Inside Book Page (/book/:id)
 [ ] Section 5 — Player Page (/player/:id)
 [ ] Section 6 — Sales / Choose Plan Page (/choose-plan)
 [ ] Section 7 — Settings Page (/settings)
-[ ] Section 8 — Search Bar
-[ ] Section 9 — Sidebar
+[x] Section 8 — Search Bar
+[x] Section 9 — Sidebar
 [ ] Section 10 — Skeleton Loading State
 [ ] Section 11 — Library Page (Optional)
 
@@ -253,3 +253,5 @@ In order to install react icons, use the following command: npm install react-ic
       If a user clicked on "Add title to My Library", it would be displayed here.
     - Display the finished books:
       If a user finishes a book, it will be displayed here. (A book is considered finished if the user listens till the end)
+
+      We built the Summarist virtual internship project using Next.js 16, TypeScript, Firebase, Redux Toolkit, React Icons, and Tailwind CSS v4. Tailwind v4 does not support arbitrary values like bg-[#032b41] reliably so we use inline styles for colors and spacing, named CSS classes in globals.css for reusable styles (btn-primary, btn-library, book-tag, book-pill, book-description, app-page), and Tailwind only for structural layout (flex, grid, gap, overflow). We added @theme variables and @source directives to globals.css. The landing page keeps home.css. All app pages live in a Next.js route group at src/app/(app)/ which has a shared layout.tsx rendering the Sidebar and SearchBar. The Sidebar has a green left border active indicator, splits nav items 3 top and 3 bottom, and handles login/logout via Firebase auth and Redux modal. The SearchBar has a 300ms debounce and dropdown results. Completed sections: 3 (For You page), 4 (Book Detail page), 8 (Search Bar), 9 (Sidebar). Remaining: responsive sidebar hamburger menu, player page, settings page, choose-plan page, skeleton loading states, and library page optional.
