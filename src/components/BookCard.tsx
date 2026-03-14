@@ -10,27 +10,53 @@ interface Props {
 
 export default function BookCard({ book }: Props) {
   return (
-    <Link href={`/book/${book.id}`} className="book__card">
+    <Link
+      href={`/book/${book.id}`}
+      className="relative flex flex-col shrink-0 w-[172px] hover:bg-[#f1f6f4] rounded-lg p-3 transition-colors"
+    >
+      {/* Premium pill */}
       {book.subscriptionRequired && (
-        <div className="book__pill">Premium</div>
+        <span className="absolute top-3 right-3 bg-[#032b41] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full z-10">
+          Premium
+        </span>
       )}
-      <figure className="book__image--mask">
+
+      {/* Cover image */}
+      <figure className="relative w-full h-[172px] mb-3 overflow-hidden rounded">
         {book.imageLink && (
-            <Image src={book.imageLink} alt={book.title} width={172} height={172} />
-            )}
+          <Image
+            src={book.imageLink}
+            alt={book.title}
+            fill
+            sizes="172px"
+            className="object-contain"
+          />
+        )}
       </figure>
-      <div className="book__title">{book.title}</div>
-      <div className="book__author">{book.author}</div>
-      <div className="book__sub--title">{book.subTitle}</div>
-      <div className="book__details">
-        <div className="book__details--info">
-          <BiTime />
-          <span>3 mins</span>
-        </div>
-        <div className="book__details--info">
-          <BsStar />
-          <span>{book.averageRating}</span>
-        </div>
+
+      {/* Title */}
+      <p className="text-[#032b41] font-bold text-sm leading-snug mb-1 line-clamp-2">
+        {book.title}
+      </p>
+
+      {/* Author */}
+      <p className="text-[#6b757b] text-xs mb-1">{book.author}</p>
+
+      {/* Subtitle */}
+      <p className="text-[#394547] text-xs font-light leading-snug mb-2 line-clamp-2">
+        {book.subTitle}
+      </p>
+
+      {/* Duration + Rating */}
+      <div className="flex items-center gap-3 text-[#032b41] text-xs mt-auto">
+        <span className="flex items-center gap-1">
+          <BiTime className="text-sm" />
+          3 mins
+        </span>
+        <span className="flex items-center gap-1">
+          <BsStar className="text-sm" />
+          {book.averageRating}
+        </span>
       </div>
     </Link>
   );

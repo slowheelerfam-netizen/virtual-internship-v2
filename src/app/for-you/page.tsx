@@ -13,51 +13,73 @@ export default function ForYouPage() {
   const [recommended, setRecommended] = useState<Book[]>([]);
   const [suggested, setSuggested] = useState<Book[]>([]);
 
-  useEffect(() => {
-    fetch("https://us-central1-summaristt.cloudfunctions.net/getBooks?status=selected")
-      .then((res) => res.json())
-      .then((data) => setSelected(data));
+    useEffect(() => {
+      fetch("https://us-central1-summaristt.cloudfunctions.net/getBooks?status=selected")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("selected:", data);
+          setSelected(Array.isArray(data) ? data[0] : data);
+        });
 
-    fetch("https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended")
-      .then((res) => res.json())
-      .then((data) => setRecommended(data));
+      fetch("https://us-central1-summaristt.cloudfunctions.net/getBooks?status=recommended")
+        .then((res) => res.json())
+        .then((data) => setRecommended(data));
 
-    fetch("https://us-central1-summaristt.cloudfunctions.net/getBooks?status=suggested")
-      .then((res) => res.json())
-      .then((data) => setSuggested(data));
-  }, []);
+      fetch("https://us-central1-summaristt.cloudfunctions.net/getBooks?status=suggested")
+        .then((res) => res.json())
+        .then((data) => setSuggested(data));
+    }, []);
 
   return (
-    <div className="for-you__wrapper">
-      <section className="for-you__section">
-        <div className="for-you__title">Selected just for you</div>
+    <div className="max-w-[1070px] w-full mx-auto px-6 py-10">
+
+      {/* Selected just for you */}
+      <section className="mb-10">
+        <h2 className="text-2xl font-bold text-[#032b41] mb-4">
+          Selected just for you
+        </h2>
         {selected && (
-          <Link href={`/book/${selected.id}`} className="selected__book">
-            <div className="selected__book--subtitle">{selected.subTitle}</div>
-            <div className="selected__book--line" />
-            <div className="selected__book--content">
-              <figure className="selected__book--image-mask">
+          <Link
+            href={`/book/${selected.id}`}
+            className="flex flex-col sm:flex-row gap-6 bg-[#fbe8c3] rounded-lg p-6 hover:opacity-90 transition-opacity"
+          >
+            <p className="text-[#394547] text-sm sm:hidden">{selected.subTitle}</p>
+            <div className="hidden sm:block w-px bg-[#bac8ce] self-stretch" />
+
+            {/* Left: subtitle + divider (desktop) */}
+            <div className="hidden sm:flex flex-col justify-center flex-1">
+              <p className="text-[#394547] text-base">{selected.subTitle}</p>
+            </div>
+
+            <div className="hidden sm:block w-px bg-[#bac8ce] self-stretch" />
+
+            {/* Right: book info */}
+            <div className="flex gap-4 flex-1">
+              <figure className="relative shrink-0 w-[140px] h-[140px] overflow-hidden rounded">
                 {selected.imageLink && (
                   <Image
                     src={selected.imageLink}
                     alt={selected.title}
-                    width={140}
-                    height={140}
+                    fill
+                    sizes="140px"
+                    className="object-contain"
                   />
                 )}
               </figure>
-              <div className="selected__book--details">
-                <div className="selected__book--title">{selected.title}</div>
-                <div className="selected__book--author">{selected.author}</div>
-                <div className="selected__book--info">
-                  <div className="selected__book--info-item">
-                    <BiTime />
-                    <span>3 mins</span>
-                  </div>
-                  <div className="selected__book--info-item">
-                    <BsStar />
-                    <span>{selected.averageRating}</span>
-                  </div>
+              <div className="flex flex-col justify-center gap-2">
+                <p className="text-[#032b41] font-bold text-base leading-tight">
+                  {selected.title}
+                </p>
+                <p className="text-[#394547] text-sm">{selected.author}</p>
+                <div className="flex items-center gap-4 text-[#032b41] text-sm mt-1">
+                  <span className="flex items-center gap-1">
+                    <BiTime className="text-base" />
+                    3 mins
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <BsStar className="text-base" />
+                    {selected.averageRating}
+                  </span>
                 </div>
               </div>
             </div>
@@ -65,25 +87,32 @@ export default function ForYouPage() {
         )}
       </section>
 
-      <section className="for-you__section">
-        <div className="for-you__title">Recommended For You</div>
-        <div className="for-you__subtitle">We think you&apos;ll like these</div>
-        <div className="books__wrapper">
+      {/* Recommended For You */}
+      <section className="mb-10">
+        <h2 className="text-2xl font-bold text-[#032b41] mb-1">
+          Recommended For You
+        </h2>
+        <p className="text-[#394547] text-sm mb-4">We think you&apos;ll like these</p>
+        <div className="flex gap-4 overflow-x-auto pb-2">
           {recommended.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}
         </div>
       </section>
 
-      <section className="for-you__section">
-        <div className="for-you__title">Suggested Books</div>
-        <div className="for-you__subtitle">Browse these books</div>
-        <div className="books__wrapper">
+      {/* Suggested Books */}
+      <section className="mb-10">
+        <h2 className="text-2xl font-bold text-[#032b41] mb-1">
+          Suggested Books
+        </h2>
+        <p className="text-[#394547] text-sm mb-4">Browse these books</p>
+        <div className="flex gap-4 overflow-x-auto pb-2">
           {suggested.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}
         </div>
       </section>
+
     </div>
   );
 }
