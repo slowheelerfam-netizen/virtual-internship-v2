@@ -173,3 +173,137 @@
   align-items: center;
   gap: 4px;
 }
+
+/* BOOK PAGE */
+.book__page {
+  padding: 24px 48px;
+  max-width: 1070px;
+  width: 100%;
+}
+
+.book__page--loading {
+  padding: 48px;
+  font-size: 18px;
+  color: #032b41;
+}
+
+.book__page--container {
+  display: flex;
+  gap: 48px;
+}
+
+.book__page--left {
+  flex: 1;
+}
+
+.book__page--right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book__page--title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #032b41;
+  margin-bottom: 8px;
+}
+
+.book__page--author {
+  font-size: 18px;
+  color: #394547;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+.book__page--subtitle {
+  font-size: 16px;
+  color: #394547;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.book__page--details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 16px 0;
+  border-top: 1px solid #e1e7ea;
+  border-bottom: 1px solid #e1e7ea;
+}
+
+.book__page--btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 180px;
+  min-width: 160px;
+  height: 48px;
+  background-color: #032b41;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.book__page--btn:hover:not(:disabled) {
+  background-color: #04405e;
+}
+
+.book__page--detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #032b41;
+}
+
+.book__page--buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.book__page--pill {
+  display: inline-block;
+  background-color: #032b41;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+.book__page--description-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #032b41;
+  margin-bottom: 16px;
+  margin-top: 24px;
+}
+
+.book__page--tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.book__page--tag {
+  background-color: #f1f6f4;
+  color: #032b41;
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.book__page--description {
+  font-size: 14px;
+  color: #394547;
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+
