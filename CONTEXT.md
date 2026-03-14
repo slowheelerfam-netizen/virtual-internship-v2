@@ -4,7 +4,7 @@ Copy of Virtual Internship v2
 
 [x] Section 1 — Project Setup & Home Page
 [x] Section 2 — Authentication Modal
-[ ] Section 3 — For You Page
+[x] Section 3 — For You Page
 [ ] Section 4 — Inside Book Page (/book/:id)
 [ ] Section 5 — Player Page (/player/:id)
 [ ] Section 6 — Sales / Choose Plan Page (/choose-plan)
