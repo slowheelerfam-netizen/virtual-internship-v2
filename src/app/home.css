@@ -403,7 +403,7 @@ button:disabled {
 .footer__link {
   color: #394547;
   font-size: 14px;
-  cursor: not-allowed;
+  cursor: pointer;
 }
 
 .footer__link--wrapper:last-child {

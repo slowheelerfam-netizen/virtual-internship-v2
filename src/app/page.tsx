@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import Image from "next/image";
 import { AiFillFileText, AiFillBulb, AiFillAudio } from "react-icons/ai";
@@ -157,7 +158,9 @@ export default function Home() {
                 <div className="footer__link--title">Actions</div>
                 <div>
                   <div className="footer__link--wrapper"><a className="footer__link">Summarist Magazine</a></div>
-                  <div className="footer__link--wrapper"><a className="footer__link">Cancel Subscription</a></div>
+                  <div className="footer__link--wrapper">
+                    <Link className="footer__link" href="/settings">Cancel Subscription</Link>
+                  </div>
                   <div className="footer__link--wrapper"><a className="footer__link">Help</a></div>
                   <div className="footer__link--wrapper"><a className="footer__link">Contact us</a></div>
                 </div>
@@ -165,7 +168,9 @@ export default function Home() {
               <div className="footer__block">
                 <div className="footer__link--title">Useful Links</div>
                 <div>
-                  <div className="footer__link--wrapper"><a className="footer__link">Pricing</a></div>
+                  <div className="footer__link--wrapper">
+                    <Link className="footer__link" href="/choose-plan">Pricing</Link>
+                  </div>
                   <div className="footer__link--wrapper"><a className="footer__link">Summarist Business</a></div>
                   <div className="footer__link--wrapper"><a className="footer__link">Gift Cards</a></div>
                   <div className="footer__link--wrapper"><a className="footer__link">Authors & Publishers</a></div>

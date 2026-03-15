@@ -52,13 +52,34 @@ export default function BookPage() {
     }
   };
 
-  if (!book) {
-    return (
-      <div style={{ padding: "48px", fontSize: "18px", color: "#032b41" }}>
-        Loading...
-      </div>
-    );
-  }
+    if (!book) {
+        return (
+          <div className="app-page">
+            <div className="flex flex-col md:flex-row gap-12">
+              <div className="flex-1" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div className="skeleton" style={{ height: "36px", width: "70%", borderRadius: "6px" }} />
+                <div className="skeleton" style={{ height: "22px", width: "40%", borderRadius: "6px" }} />
+                <div className="skeleton" style={{ height: "22px", width: "60%", borderRadius: "6px" }} />
+                <div className="skeleton" style={{ height: "80px", width: "100%", borderRadius: "6px" }} />
+                <div style={{ display: "flex", gap: "16px" }}>
+                  <div className="skeleton" style={{ height: "52px", width: "140px", borderRadius: "4px" }} />
+                  <div className="skeleton" style={{ height: "52px", width: "140px", borderRadius: "4px" }} />
+                </div>
+                <div className="skeleton" style={{ height: "22px", width: "200px", borderRadius: "4px" }} />
+                <div className="skeleton" style={{ height: "28px", width: "50%", borderRadius: "6px" }} />
+                <div style={{ display: "flex", gap: "8px" }}>
+                  <div className="skeleton" style={{ height: "36px", width: "80px", borderRadius: "4px" }} />
+                  <div className="skeleton" style={{ height: "36px", width: "100px", borderRadius: "4px" }} />
+                </div>
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="skeleton" style={{ height: "16px", width: "100%", borderRadius: "4px" }} />
+                ))}
+              </div>
+              <div className="skeleton" style={{ width: "300px", height: "300px", flexShrink: 0, borderRadius: "6px" }} />
+            </div>
+          </div>
+        );
+      }
 
   return (
     <div className="app-page">
