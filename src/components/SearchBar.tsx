@@ -29,16 +29,18 @@ export default function SearchBar() {
   }, [debouncedQuery]);
 
   return (
-    <div ref={ref} style={{ position: "relative", width: "100%", maxWidth: "300px" }}>
-      <div style={{ display: "flex", alignItems: "center", backgroundColor: "#f1f6f4", borderRadius: "8px", padding: "0 12px", height: "40px", gap: "8px" }}>
-        <AiOutlineSearch style={{ color: "#032b41", fontSize: "20px", flexShrink: 0 }} />
+    <div ref={ref} style={{ position: "relative", width: "100%", maxWidth: "360px" }}>
+      <div style={{ display: "flex", alignItems: "center", backgroundColor: "#f1f6f4", borderRadius: "8px", height: "40px", border: "1px solid #e1e7ea", overflow: "hidden" }}>
         <input
           type="text"
           placeholder="Search for books"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          style={{ border: "none", background: "transparent", outline: "none", fontSize: "14px", color: "#032b41", width: "100%" }}
+          style={{ border: "none", background: "transparent", outline: "none", fontSize: "14px", color: "#032b41", width: "100%", padding: "0 12px" }}
         />
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "44px", height: "100%", borderLeft: "1px solid #e1e7ea", flexShrink: 0 }}>
+          <AiOutlineSearch style={{ color: "#032b41", fontSize: "20px" }} />
+        </div>
       </div>
 
       {(results.length > 0 || loading) && query.trim() && (

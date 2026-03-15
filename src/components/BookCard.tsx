@@ -13,16 +13,28 @@ export default function BookCard({ book }: Props) {
     <Link
       href={`/book/${book.id}`}
       className="relative flex flex-col shrink-0 w-[172px] hover:bg-[#f1f6f4] rounded-lg p-3 transition-colors"
+      style={{ textDecoration: "none" }}
     >
       {/* Premium pill */}
       {book.subscriptionRequired && (
-        <span className="absolute top-3 right-3 bg-[#032b41] text-white text-[10px] font-semibold px-2 py-0.5 rounded-full z-10">
+        <span style={{
+          position: "absolute",
+          top: "12px",
+          right: "12px",
+          backgroundColor: "#032b41",
+          color: "#fff",
+          fontSize: "10px",
+          fontWeight: 600,
+          padding: "2px 8px",
+          borderRadius: "20px",
+          zIndex: 10,
+        }}>
           Premium
         </span>
       )}
 
       {/* Cover image */}
-      <figure className="relative w-full h-[172px] mb-3 overflow-hidden rounded">
+      <figure className="relative w-full mb-3 overflow-hidden rounded" style={{ height: "172px" }}>
         {book.imageLink && (
           <Image
             src={book.imageLink}
@@ -35,26 +47,28 @@ export default function BookCard({ book }: Props) {
       </figure>
 
       {/* Title */}
-      <p className="text-[#032b41] font-bold text-sm leading-snug mb-1 line-clamp-2">
+      <p style={{ color: "#032b41", fontWeight: 700, fontSize: "16px", lineHeight: 1.3, marginBottom: "4px" }}
+         className="line-clamp-2">
         {book.title}
       </p>
 
       {/* Author */}
-      <p className="text-[#6b757b] text-xs mb-1">{book.author}</p>
+      <p style={{ color: "#6b757b", fontSize: "14px", marginBottom: "4px" }}>{book.author}</p>
 
       {/* Subtitle */}
-      <p className="text-[#394547] text-xs font-light leading-snug mb-2 line-clamp-2">
+      <p style={{ color: "#032b41", fontSize: "14px", fontWeight: 300, lineHeight: 1.4, marginBottom: "8px" }}
+         className="line-clamp-2">
         {book.subTitle}
       </p>
 
       {/* Duration + Rating */}
-      <div className="flex items-center gap-3 text-[#032b41] text-xs mt-auto">
-        <span className="flex items-center gap-1">
-          <BiTime className="text-sm" />
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#6b757b", fontSize: "14px", marginTop: "auto" }}>
+        <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <BiTime />
           3 mins
         </span>
-        <span className="flex items-center gap-1">
-          <BsStar className="text-sm" />
+        <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <BsStar />
           {book.averageRating}
         </span>
       </div>

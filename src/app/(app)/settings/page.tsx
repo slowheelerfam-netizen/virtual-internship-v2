@@ -8,6 +8,7 @@ import { auth, db } from "@/lib/firebase";
 import { useAppDispatch } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import Link from "next/link";
+import Image from "next/image";
 
 type SubStatus = "basic" | "premium" | "premium-plus";
 
@@ -57,17 +58,43 @@ export default function SettingsPage() {
 
   if (!user) {
     return (
-      <div className="app-page" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "80px", gap: "24px" }}>
-        <svg width="120" height="120" viewBox="0 0 24 24" fill="none" aria-hidden>
-          <circle cx="12" cy="8" r="4" fill="#bac8ce" />
-          <path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" fill="#bac8ce" />
-        </svg>
-        <p style={{ fontSize: "18px", color: "#394547", textAlign: "center" }}>
-          Log in to view your settings
-        </p>
-        <button className="btn-primary" onClick={() => dispatch(openModal("login"))}>
-          Login
-        </button>
+      <div className="app-page">
+        <h1 style={{ fontSize: "28px", fontWeight: 700, color: "#032b41", paddingBottom: "24px", borderBottom: "1px solid #e1e7ea", marginBottom: "40px" }}>
+          Settings
+        </h1>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", paddingTop: "24px" }}>
+          <div style={{ width: "500px", marginBottom: "16px" }}>
+            <Image
+              src="/login.png"
+              alt="Login to view settings"
+              width={500}
+              height={500}
+              style={{ width: "100%", height: "auto" }}
+            />
+          </div>
+          <p style={{ fontSize: "24px", fontWeight: 700, color: "#032b41", marginBottom: "16px" }}>
+            Log in to your account to see your details.
+          </p>
+          <button
+            style={{
+              width: "200px",
+              height: "40px",
+              backgroundColor: "#2bd97c",
+              color: "#032b41",
+              fontSize: "16px",
+              fontWeight: 400,
+              borderRadius: "4px",
+              border: "none",
+              cursor: "pointer",
+              transition: "background-color 200ms",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#20ba68")}
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#2bd97c")}
+            onClick={() => dispatch(openModal("login"))}
+          >
+            Login
+          </button>
+        </div>
       </div>
     );
   }
@@ -81,7 +108,7 @@ export default function SettingsPage() {
 
   return (
     <div className="app-page">
-      <h1 style={{ fontSize: "28px", fontWeight: 700, color: "#032b41", marginBottom: "24px" }}>
+      <h1 style={{ fontSize: "28px", fontWeight: 700, color: "#032b41", paddingBottom: "24px", borderBottom: "1px solid #e1e7ea", marginBottom: "24px" }}>
         Settings
       </h1>
 

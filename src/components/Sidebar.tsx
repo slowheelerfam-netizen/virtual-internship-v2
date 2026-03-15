@@ -43,38 +43,44 @@ export default function Sidebar() {
     { label: "For You", icon: <AiOutlineHome size={24} />, href: "/for-you" },
     { label: "My Library", icon: <BsBookmark size={22} />, href: "/library" },
     { label: "Highlights", icon: <AiOutlineBulb size={24} />, href: null },
+    { label: "Search", icon: <AiOutlineSearch size={24} />, href: null },
   ];
 
   const bottomItems: NavItem[] = [
-    { label: "Search", icon: <AiOutlineSearch size={24} />, href: null },
     { label: "Settings", icon: <AiOutlineSetting size={24} />, href: "/settings" },
     { label: "Help & Support", icon: <BsQuestionCircle size={22} />, href: null },
   ];
 
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+
   const renderItem = (item: NavItem) => {
     const isActive = item.href && pathname === item.href;
     const isDisabled = !item.href;
+    const isHovered = hoveredItem === item.label;
 
     const content = (
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "16px",
-        padding: "12px 20px",
-        color: "#032b41",
-        backgroundColor: isActive ? "#f1f6f4" : "transparent",
-        cursor: isDisabled ? "not-allowed" : "pointer",
-        transition: "background-color 200ms",
-        fontSize: "16px",
-        fontWeight: 500,
-        borderLeft: isActive ? "4px solid #2bd97c" : "4px solid transparent",
-      }}>
+      <div
+        onMouseEnter={() => setHoveredItem(item.label)}
+        onMouseLeave={() => setHoveredItem(null)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12px",
+          padding: "16px 16px",
+          color: "#032b41",
+          backgroundColor: isHovered ? "#e8f0ee" : "transparent",
+          cursor: isDisabled ? "not-allowed" : "pointer",
+          transition: "background-color 200ms",
+          fontSize: "16px",
+          fontWeight: 400,
+          borderLeft: isActive ? "4px solid #2bd97c" : "4px solid transparent",
+        }}>
         {item.icon}
         <span>{item.label}</span>
       </div>
     );
 
-    if (isDisabled) return <div key={item.label}>{content}</div>;
+    if (isDisabled) return <div key={item.label} onMouseEnter={() => setHoveredItem(item.label)} onMouseLeave={() => setHoveredItem(null)}>{content}</div>;
     return (
       <Link key={item.label} href={item.href!} style={{ color: "#032b41", textDecoration: "none" }}>
         {content}
@@ -102,7 +108,7 @@ export default function Sidebar() {
 
       <aside
         className={`sidebar__aside${isOpen ? " sidebar__aside--open" : ""}`}
-        style={{ position: "fixed", top: 0, left: 0, height: "100vh", width: "220px", backgroundColor: "#fff", borderRight: "1px solid #e1e7ea", display: "flex", flexDirection: "column", zIndex: 50, transition: "transform 300ms ease" }}
+        style={{ position: "fixed", top: 0, left: 0, height: "100vh", width: "220px", backgroundColor: "#f7f9f8", borderRight: "1px solid #e1e7ea", display: "flex", flexDirection: "column", zIndex: 50, transition: "transform 300ms ease" }}
       >
         <div style={{ padding: "24px 20px", marginBottom: "8px" }}>
           <Image src="/logo.png" alt="Summarist" width={160} height={40} />
@@ -110,18 +116,19 @@ export default function Sidebar() {
 
         <nav style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div>{topItems.map((item) => renderItem(item))}</div>
-          <div>{bottomItems.map((item) => renderItem(item))}</div>
+          <div>
+            {bottomItems.map((item) => renderItem(item))}
+            <button
+              onClick={handleAuth}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#e8f0ee")}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+              style={{ display: "flex", alignItems: "center", gap: "12px", padding: "16px 16px", width: "100%", color: "#032b41", fontSize: "16px", fontWeight: 400, cursor: "pointer", background: "none", border: "none", borderLeft: "4px solid transparent", transition: "background-color 200ms" }}
+            >
+              {user ? <BiLogOut size={24} /> : <LuLogIn size={24} />}
+              <span>{user ? "Logout" : "Login"}</span>
+            </button>
+          </div>
         </nav>
-
-        <div style={{ padding: "16px 0", borderTop: "1px solid #e1e7ea" }}>
-          <button
-            onClick={handleAuth}
-            style={{ display: "flex", alignItems: "center", gap: "16px", padding: "12px 20px", width: "100%", color: "#032b41", fontSize: "16px", fontWeight: 500, cursor: "pointer", background: "none", border: "none" }}
-          >
-            {user ? <BiLogOut size={24} /> : <LuLogIn size={24} />}
-            <span>{user ? "Logout" : "Login"}</span>
-          </button>
-        </div>
       </aside>
     </>
   );

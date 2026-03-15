@@ -34,53 +34,52 @@ export default function ForYouPage() {
 
   return (
     <div className="app-page">
+
       {/* Selected Book */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-4" style={{ color: "#032b41" }}>
+      <section style={{ marginBottom: "40px" }}>
+        <h2 style={{ fontSize: "18px", fontWeight: 700, color: "#032b41", marginBottom: "16px" }}>
           Selected just for you
         </h2>
         {selected && (
           <Link
             href={`/book/${selected.id}`}
-            style={{ backgroundColor: "#FBEFD6", borderRadius: "8px", textDecoration: "none" }}
-            className="flex flex-col md:flex-row gap-6 p-4 md:p-6 items-start md:items-center"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              backgroundColor: "#FBEFD6",
+              borderRadius: "8px",
+              textDecoration: "none",
+              maxWidth: "100%",
+              overflow: "hidden",
+            }}
           >
-            {/* Subtitle — left on desktop, top on mobile */}
-            <div className="flex items-center md:flex-1">
-              <p style={{ fontSize: "16px", color: "#394547" }}>{selected.subTitle}</p>
+            {/* Left: subtitle */}
+            <div style={{ flex: 1, padding: "24px", display: "flex", alignItems: "center" }}>
+              <p style={{ fontSize: "16px", color: "#394547", lineHeight: 1.5 }}>
+                {selected.subTitle}
+              </p>
             </div>
 
-            {/* Divider — hidden on mobile */}
-            <div
-              className="hidden md:block self-stretch"
-              style={{ width: "1px", backgroundColor: "#bac8ce" }}
-            />
+            {/* Divider */}
+            <div style={{ width: "1px", backgroundColor: "#bac8ce", margin: "16px 0" }} />
 
-            {/* Book details — right on desktop, below subtitle on mobile */}
-            <div className="flex gap-4 items-center md:flex-1">
-              <figure style={{ position: "relative", width: "140px", height: "140px", flexShrink: 0 }}>
+            {/* Right: image + meta */}
+            <div style={{ flexShrink: 0, padding: "24px", display: "flex", gap: "16px", alignItems: "center" }}>
+              <figure style={{ position: "relative", width: "120px", height: "120px", flexShrink: 0 }}>
                 {selected.imageLink && (
                   <Image
                     src={selected.imageLink}
                     alt={selected.title}
                     fill
-                    sizes="140px"
+                    sizes="120px"
                     className="object-contain"
                   />
                 )}
               </figure>
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <p style={{ fontSize: "16px", fontWeight: 700, color: "#032b41" }}>{selected.title}</p>
-                <p style={{ fontSize: "14px", color: "#394547" }}>{selected.author}</p>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "16px",
-                    fontSize: "14px",
-                    color: "#032b41",
-                  }}
-                >
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                <p style={{ fontSize: "14px", fontWeight: 700, color: "#032b41" }}>{selected.title}</p>
+                <p style={{ fontSize: "12px", color: "#394547" }}>{selected.author}</p>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", fontSize: "12px", color: "#032b41" }}>
                   <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                     <BiTime /> 3 mins
                   </span>
@@ -95,14 +94,21 @@ export default function ForYouPage() {
       </section>
 
       {/* Recommended Books */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-1" style={{ color: "#032b41" }}>
+      <section style={{ marginBottom: "40px" }}>
+        <h2 style={{ fontSize: "18px", fontWeight: 700, color: "#032b41", marginBottom: "4px" }}>
           Recommended For You
         </h2>
-        <p className="text-sm mb-4" style={{ color: "#394547" }}>
+        <p style={{ fontSize: "14px", color: "#394547", marginBottom: "16px" }}>
           We think you&apos;ll like these
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div style={{
+          display: "flex",
+          flexWrap: "nowrap",
+          gap: "16px",
+          overflowX: "auto",
+          paddingBottom: "12px",
+          scrollbarWidth: "thin",
+        }}>
           {recommended.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}
@@ -110,19 +116,27 @@ export default function ForYouPage() {
       </section>
 
       {/* Suggested Books */}
-      <section className="mb-10">
-        <h2 className="text-2xl font-bold mb-1" style={{ color: "#032b41" }}>
+      <section style={{ marginBottom: "40px" }}>
+        <h2 style={{ fontSize: "18px", fontWeight: 700, color: "#032b41", marginBottom: "4px" }}>
           Suggested Books
         </h2>
-        <p className="text-sm mb-4" style={{ color: "#394547" }}>
+        <p style={{ fontSize: "14px", color: "#394547", marginBottom: "16px" }}>
           Browse these books
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div style={{
+          display: "flex",
+          flexWrap: "nowrap",
+          gap: "16px",
+          overflowX: "auto",
+          paddingBottom: "12px",
+          scrollbarWidth: "thin",
+        }}>
           {suggested.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}
         </div>
       </section>
+
     </div>
   );
 }
