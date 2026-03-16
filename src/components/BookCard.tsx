@@ -1,14 +1,34 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Book } from "@/types/book";
 import { BsStar } from "react-icons/bs";
 import { BiTime } from "react-icons/bi";
+import { useEffect, useState } from "react";
 
 interface Props {
   book: Book;
 }
 
+function formatDuration(seconds: number): string {
+  const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+  const s = Math.floor(seconds % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
+
 export default function BookCard({ book }: Props) {
+  const [duration, setDuration] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!book.audioLink) return;
+    const audio = new Audio(book.audioLink);
+    audio.addEventListener("loadedmetadata", () => {
+      setDuration(formatDuration(audio.duration));
+      audio.src = "";
+    });
+  }, [book.audioLink]);
+
   return (
     <Link
       href={`/book/${book.id}`}
@@ -56,16 +76,16 @@ export default function BookCard({ book }: Props) {
       <p style={{ color: "#6b757b", fontSize: "14px", marginBottom: "4px" }}>{book.author}</p>
 
       {/* Subtitle */}
-      <p style={{ color: "#032b41", fontSize: "14px", fontWeight: 400, lineHeight: 1.4, marginBottom: "8px" }}
+      <p style={{ color: "#032b41", fontSize: "13px", fontWeight: 400, lineHeight: 1.4, marginBottom: "8px" }}
          className="line-clamp-2">
         {book.subTitle}
       </p>
 
       {/* Duration + Rating */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#6b757b", fontSize: "12px", marginTop: "auto" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#6b757b", fontSize: "13px", marginTop: "auto" }}>
         <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
           <BiTime />
-          3 mins
+          {duration ?? "..."}
         </span>
         <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
           <BsStar />

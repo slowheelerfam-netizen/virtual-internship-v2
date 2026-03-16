@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import styles from "@/app/home.module.css";
 
 const leftHeadings = [
   "Enhance your knowledge",
@@ -32,53 +33,53 @@ export default function StatisticsSection() {
 
   return (
     <>
-      <div className="statistics__wrapper">
-        <div className="statistics__content--header">
+      <div className={styles.statistics__wrapper}>
+        <div className={styles["statistics__content--header"]}>
           {leftHeadings.map((heading, i) => (
             <div
               key={heading}
-              className={`statistics__heading ${i === activeIndex ? "statistics__heading--active" : ""}`}
+              className={`${styles.statistics__heading} ${i === activeIndex ? styles["statistics__heading--active"] : ""}`}
             >
               {heading}
             </div>
           ))}
         </div>
-        <div className="statistics__content--details">
-          <div className="statistics__data">
-            <div className="statistics__data--number">93%</div>
-            <div className="statistics__data--title">of Summarist members <b>significantly increase</b> reading frequency.</div>
+        <div className={styles["statistics__content--details"]}>
+          <div className={styles.statistics__data}>
+            <div className={styles["statistics__data--number"]}>93%</div>
+            <div className={styles["statistics__data--title"]}>of Summarist members <b>significantly increase</b> reading frequency.</div>
           </div>
-          <div className="statistics__data">
-            <div className="statistics__data--number">96%</div>
-            <div className="statistics__data--title">of Summarist members <b>establish better</b> habits.</div>
+          <div className={styles.statistics__data}>
+            <div className={styles["statistics__data--number"]}>96%</div>
+            <div className={styles["statistics__data--title"]}>of Summarist members <b>establish better</b> habits.</div>
           </div>
-          <div className="statistics__data">
-            <div className="statistics__data--number">90%</div>
-            <div className="statistics__data--title">have made <b>significant positive</b> change to their lives.</div>
+          <div className={styles.statistics__data}>
+            <div className={styles["statistics__data--number"]}>90%</div>
+            <div className={styles["statistics__data--title"]}>have made <b>significant positive</b> change to their lives.</div>
           </div>
         </div>
       </div>
 
-      <div className="statistics__wrapper">
-        <div className="statistics__content--details statistics__content--details-second">
-          <div className="statistics__data">
-            <div className="statistics__data--number">91%</div>
-            <div className="statistics__data--title">of Summarist members <b>report feeling more productive</b> after incorporating the service into their daily routine.</div>
+      <div className={styles.statistics__wrapper}>
+        <div className={`${styles["statistics__content--details"]} ${styles["statistics__content--details-second"]}`}>
+          <div className={styles.statistics__data}>
+            <div className={styles["statistics__data--number"]}>91%</div>
+            <div className={styles["statistics__data--title"]}>of Summarist members <b>report feeling more productive</b> after incorporating the service into their daily routine.</div>
           </div>
-          <div className="statistics__data">
-            <div className="statistics__data--number">94%</div>
-            <div className="statistics__data--title">of Summarist members have <b>noticed an improvement</b> in their overall comprehension and retention of information.</div>
+          <div className={styles.statistics__data}>
+            <div className={styles["statistics__data--number"]}>94%</div>
+            <div className={styles["statistics__data--title"]}>of Summarist members have <b>noticed an improvement</b> in their overall comprehension and retention of information.</div>
           </div>
-          <div className="statistics__data">
-            <div className="statistics__data--number">88%</div>
-            <div className="statistics__data--title">of Summarist members <b>feel more informed</b> about current events and industry trends since using the platform.</div>
+          <div className={styles.statistics__data}>
+            <div className={styles["statistics__data--number"]}>88%</div>
+            <div className={styles["statistics__data--title"]}>of Summarist members <b>feel more informed</b> about current events and industry trends since using the platform.</div>
           </div>
         </div>
-        <div className="statistics__content--header statistics__content--header-second">
+        <div className={`${styles["statistics__content--header"]} ${styles["statistics__content--header-second"]}`}>
           {rightHeadings.map((heading, i) => (
             <div
               key={heading}
-              className={`statistics__heading ${i === activeIndex ? "statistics__heading--active" : ""}`}
+              className={`${styles.statistics__heading} ${i === activeIndex ? styles["statistics__heading--active"] : ""}`}
             >
               {heading}
             </div>

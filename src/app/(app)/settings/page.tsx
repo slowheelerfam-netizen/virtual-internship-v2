@@ -9,6 +9,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { openModal } from "@/store/modalSlice";
 import Link from "next/link";
 import Image from "next/image";
+import { Suspense } from "react";
 
 type SubStatus = "basic" | "premium" | "premium-plus";
 
@@ -27,7 +28,7 @@ function SettingsSkeleton() {
   );
 }
 
-export default function SettingsPage() {
+function SettingsContent() {
   const [user, setUser] = useState<User | null>(null);
   const [subStatus, setSubStatus] = useState<SubStatus>("basic");
   const [loading, setLoading] = useState(true);
@@ -77,7 +78,7 @@ export default function SettingsPage() {
           </p>
           <button
             style={{
-              width: "200px",
+              width: "170px",
               height: "40px",
               backgroundColor: "#2bd97c",
               color: "#032b41",
@@ -145,5 +146,14 @@ export default function SettingsPage() {
         </p>
       </div>
     </div>
+  );
+
+}
+
+export default function SettingsPage() {
+  return (
+    <Suspense fallback={<div className="app-page"><div className="skeleton" style={{ height: "32px", width: "180px", borderRadius: "6px" }} /></div>}>
+      <SettingsContent />
+    </Suspense>
   );
 }

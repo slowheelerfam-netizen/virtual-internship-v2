@@ -19,37 +19,48 @@ export default function LibraryPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-        setLoading(false);
+    const unsub = onAuthStateChanged(auth, async (u) => {
+      setUser(u);
+      if (u) {
+        try {
+          const savedBooksRef = collection(db, "users", u.uid, "savedBooks");
+          const finishedBooksRef = collection(db, "users", u.uid, "finishedBooks");
+          const [savedSnap, finishedSnap] = await Promise.all([
+            getDocs(savedBooksRef),
+            getDocs(finishedBooksRef),
+          ]);
+          setSavedBooks(savedSnap.docs.map((doc) => doc.data() as Book));
+          setFinishedBooks(finishedSnap.docs.map((doc) => doc.data() as Book));
+        } catch {
+          // default to empty
+        }
       }
+      setLoading(false);
     });
+    return () => unsub();
   }, []);
 
-  useEffect(() => {
-    async function getLibraryBooks() {
-      if (user && user.uid) {
-        const savedBooksRef = collection(db, "users", user.uid, "savedBooks");
-        const finishedBooksRef = collection(db, "users", user.uid, "finishedBooks");
+  if (loading) {
+    return (
+      <div className="app-page">
+        <section style={{ marginBottom: "40px" }}>
+          <div className="skeleton" style={{ height: "28px", width: "160px", borderRadius: "6px", marginBottom: "8px" }} />
+          <div className="skeleton" style={{ height: "16px", width: "80px", borderRadius: "4px", marginBottom: "16px" }} />
+          <div style={{ display: "flex", gap: "16px" }}>
+            {new Array(4).fill(0).map((_, i) => (
+              <div key={i} style={{ flexShrink: 0, width: "172px" }}>
+                <Skeleton width="172px" height="200px" />
+                <Skeleton width="172px" height="20px" />
+                <Skeleton width="100px" height="20px" />
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    );
+  }
 
-        const [savedBooksSnapshot, finishedBooksSnapshot] = await Promise.all([
-          getDocs(savedBooksRef),
-          getDocs(finishedBooksRef),
-        ]);
-
-        setSavedBooks(savedBooksSnapshot.docs.map((doc) => doc.data() as Book));
-        setFinishedBooks(finishedBooksSnapshot.docs.map((doc) => doc.data() as Book));
-        setLoading(false);
-      }
-    }
-
-    getLibraryBooks();
-  }, [user]);
-
-  if (!user && !loading) {
+  if (!user) {
     return (
       <div className="app-page">
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", paddingTop: "40px" }}>
@@ -80,20 +91,9 @@ export default function LibraryPage() {
           Saved Books
         </h2>
         <p style={{ fontSize: "14px", color: "#394547", marginBottom: "16px" }}>
-          {loading ? "..." : `${savedBooks.length} item${savedBooks.length !== 1 ? "s" : ""}`}
+          {`${savedBooks.length} item${savedBooks.length !== 1 ? "s" : ""}`}
         </p>
-
-        {loading ? (
-          <div style={{ display: "flex", gap: "16px" }}>
-            {new Array(4).fill(0).map((_, i) => (
-              <div key={i} style={{ flexShrink: 0, width: "172px" }}>
-                <Skeleton width="172px" height="200px" />
-                <Skeleton width="172px" height="20px" />
-                <Skeleton width="100px" height="20px" />
-              </div>
-            ))}
-          </div>
-        ) : savedBooks.length > 0 ? (
+        {savedBooks.length > 0 ? (
           <div style={{ display: "flex", flexWrap: "nowrap", gap: "16px", overflowX: "auto", paddingBottom: "12px", scrollbarWidth: "thin" }}>
             {savedBooks.map((book) => (
               <BookCard key={book.id} book={book} />
@@ -117,20 +117,9 @@ export default function LibraryPage() {
           Finished
         </h2>
         <p style={{ fontSize: "14px", color: "#394547", marginBottom: "16px" }}>
-          {loading ? "..." : `${finishedBooks.length} item${finishedBooks.length !== 1 ? "s" : ""}`}
+          {`${finishedBooks.length} item${finishedBooks.length !== 1 ? "s" : ""}`}
         </p>
-
-        {loading ? (
-          <div style={{ display: "flex", gap: "16px" }}>
-            {new Array(4).fill(0).map((_, i) => (
-              <div key={i} style={{ flexShrink: 0, width: "172px" }}>
-                <Skeleton width="172px" height="200px" />
-                <Skeleton width="172px" height="20px" />
-                <Skeleton width="100px" height="20px" />
-              </div>
-            ))}
-          </div>
-        ) : finishedBooks.length > 0 ? (
+        {finishedBooks.length > 0 ? (
           <div style={{ display: "flex", flexWrap: "nowrap", gap: "16px", overflowX: "auto", paddingBottom: "12px", scrollbarWidth: "thin" }}>
             {finishedBooks.map((book) => (
               <BookCard key={book.id} book={book} />
