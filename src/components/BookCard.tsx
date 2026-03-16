@@ -47,7 +47,7 @@ export default function BookCard({ book }: Props) {
       </figure>
 
       {/* Title */}
-      <p style={{ color: "#032b41", fontWeight: 700, fontSize: "16px", lineHeight: 1.3, marginBottom: "4px" }}
+      <p style={{ color: "#032b41", fontWeight: 700, fontSize: "14px", lineHeight: 1.3, marginBottom: "4px", paddingTop: "8px" }}
          className="line-clamp-2">
         {book.title}
       </p>
@@ -56,13 +56,13 @@ export default function BookCard({ book }: Props) {
       <p style={{ color: "#6b757b", fontSize: "14px", marginBottom: "4px" }}>{book.author}</p>
 
       {/* Subtitle */}
-      <p style={{ color: "#032b41", fontSize: "14px", fontWeight: 300, lineHeight: 1.4, marginBottom: "8px" }}
+      <p style={{ color: "#032b41", fontSize: "14px", fontWeight: 400, lineHeight: 1.4, marginBottom: "8px" }}
          className="line-clamp-2">
         {book.subTitle}
       </p>
 
       {/* Duration + Rating */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#6b757b", fontSize: "14px", marginTop: "auto" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", color: "#6b757b", fontSize: "12px", marginTop: "auto" }}>
         <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
           <BiTime />
           3 mins
